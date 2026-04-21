@@ -53,4 +53,56 @@ public class TodoService {
         return res;
     }
 
+    //readbyid
+    public TodoDTO readByid(Long id) {
+
+        Todo todo = todorepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Todo not found"));
+
+        TodoDTO res = new TodoDTO();
+
+        res.setName(todo.getName());
+        res.setDescription(todo.getDescription());
+        res.setCompleted(todo.isCompleted());
+
+        return res;
+    }
+
+    //update
+
+    public TodoDTO updateTodo(Long id, TodoDTO dto) {
+    
+        TodoDTO res = new TodoDTO();
+        
+         Todo todo = todorepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Todo not found"));
+        
+        todo.setName(dto.getName());
+        todo.setDescription(dto.getDescription());
+        todo.setCompleted(dto.isCompleted());
+
+        todorepo.save(todo);
+
+        res.setName(todo.getName());
+        res.setDescription(todo.getDescription());
+        res.setCompleted(todo.isCompleted());
+        
+        return res;
+   }
+   //deleteall
+   public String deleteAll() {
+
+       todorepo.deleteAll();
+
+       return "deleted";
+   }
+
+   //deletebyid 
+   public String deleteById(Long id) {
+
+       todorepo.deleteById(id);
+
+       return "todo deleted";
+   }
+
 }
