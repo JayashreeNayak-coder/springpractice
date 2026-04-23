@@ -37,6 +37,7 @@ public class BookController {
 
         return service.GetAllBook();
     }
+    
     //readByid
     @GetMapping("/{id}")
     public BookResponseDTO getBookById(@PathVariable Long id) {
