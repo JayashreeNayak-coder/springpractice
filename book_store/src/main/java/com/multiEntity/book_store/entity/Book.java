@@ -1,33 +1,31 @@
-package com.project3.student_management.entity;
-
+package com.multiEntity.book_store.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="student")
-public class Student {
-
+@Entity
+@Table(name="book")
+public class Book {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    private String name;
-    private String email;
+    private Long BookId;
 
-    
-    private String course;
+    private String title;
+    private Double price;
 
-
-    
-    
+    @ManyToOne
+    @JoinColumn(name="author_id")
+    private Author author;
 }
